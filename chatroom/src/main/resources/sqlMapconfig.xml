@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--约束文档-->
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<!--    <environments>可以配置多个环境，default属性使用指定的一个环境-->
+    <environments default="mysql">
+<!--        环境的详细配置-->
+        <environment id="mysql">
+<!--            配置事务管理器，type属性的JDBC，说明事务的管理底层使用的是JDBC的事务-->
+            <transactionManager type="JDBC"></transactionManager>
+<!--            配置数据源-->
+<!--            type属性值有个：-->
+<!--                POOLED:说明使用了数据库连接池，数据库连接池是MyBatis框架自己实现的连接池-->
+<!--                UNPOOLED:说明没有使用数据库连接池-->
+<!--                JNDI：JavaEE技术之一-->
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/charroom"/>
+                <property name="username" value="root"/>
+                <property name="password" value="qddsfg123."/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+<!--        配置具体的某一个映射文件，resource属性是关联映射文件的路径-->
+        <mapper resource="com/dao/CharContentDao.xml"/>
+    </mappers>
+</configuration>

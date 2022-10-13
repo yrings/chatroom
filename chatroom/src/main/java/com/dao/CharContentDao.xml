@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--约束文档-->
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--配置映射文件的详细信息，namespace属性是配置这个映射里面操作的针对具体Dao的各种方法-->
+<mapper namespace="com.dao.CharContentDao">
+<!--    id属性是指定Dao中的哪一个具体的方法-->
+<!--    resultType属性是指定返回值类型-->
+<!--    parameterType属性指定的参数类型-->
+    <insert id="addNewcontent" parameterType="com.pojo.CharContent">
+        insert into charcontent (content,user,flag) values(#{content},#{username},1)
+    </insert>
+    <select id="findNewcontent" resultType="com.pojo.CharContent">
+        select * from charcontent where flag = 1 order by id desc limit 10
+    </select>
+    <select id="findAllContent" resultType="com.pojo.CharContent">
+        select * from charcontent where flag = 1
+    </select>
+    <delete id="deleteContent" parameterType="com.pojo.CharContent">
+        delete from charcontent where id = #{id}
+    </delete>
+    <update id="logicDelete" parameterType="com.pojo.CharContent">
+        update charcontent set flag = 0 where id = #{id}
+    </update>
+    <update id="recoverContent" parameterType="com.pojo.CharContent">
+        update  charcontent set flag = 1 where  id =#{id}
+    </update>
+    <select id="findAllLogicDelete" resultType="com.pojo.CharContent">
+        select * from charcontent where flag = 0
+    </select>
+</mapper>

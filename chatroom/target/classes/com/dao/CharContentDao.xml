@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.CharContentDao">
+    <insert id="addNewcontent" parameterType="com.pojo.CharContent">
+        insert into charcontent (content,user,flag) values(#{content},#{username},1)
+    </insert>
+    <select id="findNewcontent" resultType="com.pojo.CharContent">
+        select * from charcontent where flag = 1 order by id desc limit 10
+    </select>
+    <select id="findAllContent" resultType="com.pojo.CharContent">
+        select * from charcontent where flag = 1
+    </select>
+    <delete id="deleteContent" parameterType="com.pojo.CharContent">
+        delete from charcontent where id = #{id}
+    </delete>
+    <update id="logicDelete" parameterType="com.pojo.CharContent">
+        update charcontent set flag = 0 where id = #{id}
+    </update>
+    <update id="recoverContent" parameterType="com.pojo.CharContent">
+        update  charcontent set flag = 1 where  id =#{id}
+    </update>
+    <select id="findAllLogicDelete" resultType="com.pojo.CharContent">
+        select * from charcontent where flag = 0
+    </select>
+</mapper>
